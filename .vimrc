@@ -6,11 +6,23 @@ let maplocalleader = ","
 
 syntax on
 
+" Longer recall of command line commands
+set history=200
+
+" No swap file
+set noswapfile
+
 " Edit .vimrc quickly "<leader>ev
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 
 " Source .vimrc immediately
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Set number format
+set nrformats=
+
+" Set line number
+set number
 
 " Abbreviations
 iabbrev @@  andreslib@gmail.com
@@ -29,8 +41,11 @@ inoremap jk <esc>
 " Open NERDTree
 noremap <Leader>f :NERDTreeToggle<Enter>
 
-" Comment in Python
-" autocmd FileType python nnoremap <buffer> <localleader>com I#<esc>
+" Mappings to quickly traverse lists
+nnoremap <silent> [b :bprevious<CR> 
+nnoremap <silent> ]b :bnext<CR> 
+nnoremap <silent> [B :bfirst<CR> 
+nnoremap <silent> ]B :blast<CR>
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -44,15 +59,18 @@ Plugin 'gmarik/Vundle.vim'
 
 " add all your plugins here (note older versions of Vundle
 " used Bundle instead of Plugin)
-" 
+ 
 " Auto complete
-" Bundle 'Valloric/YouCompleteMe'
+Plugin 'davidhalter/jedi-vim'
 
 " Color scheme
 Plugin 'flazz/vim-colorschemes'
 
 " Auto-indentation
 Plugin 'vim-scripts/indentpython.vim'
+
+" Commentary
+Plugin 'chrisbra/vim-commentary'
 
 " Simply Fold
 Plugin 'tmhedberg/SimpylFold'
@@ -69,9 +87,6 @@ Plugin 'benmills/vimux'
 Plugin 'jpalardy/vim-slime', { 'on_ft': 'python' }
 Plugin 'hanschen/vim-ipython-cell'
 
-
-" Conda - Vim
-" Plugin 'cjrh/vim-conda'
 
 " ...
 
@@ -100,8 +115,8 @@ let g:slime_dont_ask_default = 1
 " map <Leader>s to start IPython
 nnoremap <Leader>s :SlimeSend1 ipython --matplotlib<CR>
 
-" map <Leader>r to run script
-nnoremap <Leader>r :IPythonCellRun<CR>
+" map <Leader>rr to run script
+nnoremap <Leader>rr :IPythonCellRun<CR>
 
 " map <Leader>R to run script and time the execution
 nnoremap <Leader>R :IPythonCellRunTime<CR>
@@ -161,5 +176,5 @@ au BufNewFile,BufRead *.py
 
 " press <F9> to execute the current buffer with python (from
 " https://stackoverflow.com/questions/18948491/running-python-code-in-vim
-autocmd FileType python map <buffer> <F9> :w<CR>:exec '!clear; python3' shellescape(@%, 1)<CR>
+" autocmd FileType python map <buffer> <F9> :w<CR>:exec '!clear; python3' shellescape(@%, 1)<CR>
 
